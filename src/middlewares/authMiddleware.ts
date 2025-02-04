@@ -3,13 +3,14 @@ import jwt from 'jsonwebtoken';
 
 const SECRET_KEY = process.env.JWT_SECRET || 'secret123';
 
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = (req: Request, res: Response, next: NextFunction): void => {
     // Get token from header
     const token = req.header('Authorization');
 
     // Check if there is no token, return 401
     if (!token) {
-        return res.status(401).json({ message: 'No token provided' });
+        res.status(401).json({ message: 'No token provided' });
+        return;
     }
 
     try {
@@ -20,8 +21,9 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         req.body.user = decoded;
 
         // Call next middleware or controller
-        next();
+        return next();
     } catch (error) {
-        return res.status(401).json({ message: 'Unauthorized' });
+        res.status(401).json({ message: 'Unauthorized' });
+        return;
     }
 }

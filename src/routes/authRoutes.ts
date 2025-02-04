@@ -16,12 +16,14 @@ router.post("/register", async (req, res) => {
         const { username, password } = req.body;
     
         if (!username || !password) {
-          return res.status(400).json({ message: "Username and password are required" });
+          res.status(400).json({ message: "Username and password are required" });
+          return;
         }
     
         const existingUser = users.find((user) => user.username === username);
         if (existingUser) {
-          return res.status(400).json({ message: "The user already exists" });
+          res.status(400).json({ message: "The user already exists" });
+          return;
         }
     
         const newUser = await createUser(username, password);
@@ -44,17 +46,20 @@ router.post("/login", async (req, res) => {
     try {
         const { username, password } = req.body;
         if (!username || !password) {
-            return res.status(400).json({ message: "Username and password are required" });
+            res.status(400).json({ message: "Username and password are required" });
+            return;
         }
 
         const user = users.find((u) => u.username === username);
         if (!user) {
-            return res.status(401).json({ message: "Invalid credentials" });
+            res.status(401).json({ message: "Invalid credentials" });
+            return;
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(401).json({ message: "Invalid credentials" });
+            res.status(401).json({ message: "Invalid credentials" });
+            return;
         }
 
         const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, { expiresIn: "1h" });
