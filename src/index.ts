@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import authRoutes from './routes/authRoutes';
 import restaurantRoutes from './routes/restaurantRoutes';
 
 dotenv.config();
@@ -12,6 +13,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5001;
 
+// app.use("/api/auth", authRoutes);
 app.use('/api/restaurants', restaurantRoutes);
 
 app.get('/', (req, res) => {
