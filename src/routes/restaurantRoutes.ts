@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { Restaurant, restaurants} from '../models/Restaurant';
+import { authMiddleware } from '../middlewares/authMiddleware';
 
 const router = Router();
 
@@ -35,9 +36,9 @@ router.get('/:id', (req, res) => {
 
 /**
  * @route POST /api/restaurants
- * @description Create a new restaurant
+ * @description Create a new restaurant if the user is authenticated
  */
-router.post('/', (req, res) => {
+router.post('/', authMiddleware, (req, res) => {
     try {
         //Recieve the data from the request body
         const {
@@ -67,9 +68,9 @@ router.post('/', (req, res) => {
 
 /**
  * @route PUT /api/restaurants/:id
- * @description Update a restaurant by its id
+ * @description Update a restaurant by its id if the user is authenticated
  */
-router.put('/:id', (req, res) => {
+router.put('/:id', authMiddleware, (req, res) => {
     try {
         const id = req.params.id;
         const {
@@ -100,9 +101,9 @@ router.put('/:id', (req, res) => {
 
 /**
  * @route DELETE /api/restaurants/:id
- * @description Delete a restaurant by its id
+ * @description Delete a restaurant by its id if the user is authenticated
  */
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authMiddleware, (req, res) => {
     try {
         const id = req.params.id;
         
