@@ -30,7 +30,6 @@ router.post("/register", async (req, res) => {
           message: "User resgitered successfully", 
           user: { id: newUser.id, username: newUser.username } 
         });
-    
       } catch (error) {
         console.error("Error on saving user:", error);
         res.status(500).json({ message: "Internal server error" });
