@@ -17,7 +17,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
         // Verify token
         const decoded = jwt.verify(token, SECRET_KEY);
         
-        // Attaches the decoded user to req.user and allows access.
+        // Attaches the decoded user to req.body.user and allows access.
         req.body.user = decoded;
 
         // Call next middleware or controller
