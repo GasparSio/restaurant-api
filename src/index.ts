@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes';
 import restaurantRoutes from './routes/restaurantRoutes';
+import commentRoutes from './routes/commentRoutes';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 5001;
 
 app.use("/api/auth", authRoutes);
 app.use('/api/restaurants', restaurantRoutes);
+app.use('/api/restaurants', commentRoutes);
 
 app.get('/', (req, res) => {
     res.send('Restaurant API funcionando 🚀')

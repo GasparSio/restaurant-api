@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 export interface Restaurant {
     id: string;
     name: string;
@@ -6,12 +8,12 @@ export interface Restaurant {
     rating: number;
     image: string;
     description: string;
-    comments: Comments[];
+    comments: Comment[];
 }
 
-export interface Comments {
+export interface Comment {
     id: string;
-    user: string;
+    user: User;
     text: string;
     date: string;
 }
