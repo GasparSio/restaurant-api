@@ -84,7 +84,7 @@ router.put('/:rId/comments/:cId', authMiddleware, (req, res) => {
  * @route DELETE /api/restaurants/:rId/comments/:cId
  * @description Delete a comment of a restaurant by id only if the user is the author
  */
-router.delete('/rId/comments/cId', authMiddleware, (req, res) => {
+router.delete('/:rId/comments/:cId', authMiddleware, (req, res) => {
     const { rId, cId } = req.params;
     const { user } = req.body;
     try {
@@ -105,14 +105,14 @@ router.delete('/rId/comments/cId', authMiddleware, (req, res) => {
         }
 
         //Check if the user is the author of the comment
-        if (restaurant.comments[commentIndex].user !== user) {
-            res.status(403).json({ message: "No puedes eliminar este comentario" });
+        if (String(restaurant.comments[commentIndex].user.id) !== String(user.id)) {
+            res.status(403).json({ message: "You cant delete this comment" });
             return;
         }
 
         //Delete the comment
         restaurant.comments.splice(commentIndex, 1);
-        res.json({ message: "Comentario eliminado" });
+        res.json({ message: "Comment deleted" });
     } catch (error) {
         console.error("Error deleting a comment of a restaurant", error);
         res.status(400).json({ message: 'Error deleting a comment' });       
