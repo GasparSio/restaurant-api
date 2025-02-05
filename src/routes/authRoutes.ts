@@ -13,24 +13,25 @@ const SECRET_KEY = process.env.JWT_SECRET || 'secret123';
  */
 router.post("/register", async (req, res) => {
     try {
-        const { username, password } = req.body;
+        console.log('entro al api/auth/register')
+        const { email, username, password } = req.body;
     
-        if (!username || !password) {
-          res.status(400).json({ message: "Username and password are required" });
+        if (!email || !username || !password) {
+          res.status(400).json({ message: "Email and password are required" });
           return;
         }
     
-        const existingUser = users.find((user) => user.username === username);
+        const existingUser = users.find((user) => user.email === email);
         if (existingUser) {
           res.status(400).json({ message: "The user already exists" });
           return;
         }
     
-        const newUser = await createUser(username, password);
+        const newUser = await createUser(email, username, password);
     
         res.status(201).json({ 
           message: "User resgitered successfully", 
-          user: { id: newUser.id, username: newUser.username } 
+          user: { id: newUser.id, email: newUser.email } 
         });
       } catch (error) {
         console.error("Error on saving user:", error);
@@ -44,25 +45,33 @@ router.post("/register", async (req, res) => {
  */
 router.post("/login", async (req, res) => {
     try {
-        const { username, password } = req.body;
-        if (!username || !password) {
-            res.status(400).json({ message: "Username and password are required" });
+        const { email, password } = req.body;
+        console.log('email, password', email, password)
+        if (!email || !password) {
+            res.status(400).json({ message: "Email and password are required" });
             return;
         }
 
-        const user = users.find((u) => u.username === username);
+        const user = users.find((u) => u.email === email);
+        console.log('user encontrado?', user)
         if (!user) {
             res.status(401).json({ message: "Invalid credentials" });
             return;
         }
 
+        if (!user.password) {
+            res.status(401).json({ message: "Invalid credentials" });
+            return;
+        }
         const isPasswordValid = await bcrypt.compare(password, user.password);
+        console.log('isPasswordValid', isPasswordValid)
         if (!isPasswordValid) {
             res.status(401).json({ message: "Invalid credentials" });
             return;
         }
 
-        const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, { expiresIn: "1h" });
+        const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: "2h" });
+        console.log('token', token)
         res.json({ token });
     } catch (error) {
         console.error("Error on login:", error);

@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5001;
 
 app.use("/api/auth", authRoutes);
 app.use('/api/restaurants', restaurantRoutes);
-app.use('/api/restaurants', commentRoutes);
+app.use('/api/comments', commentRoutes);
 app.use('/api/favorites', favoriteRoutes);
 
 app.get('/', (req, res) => {

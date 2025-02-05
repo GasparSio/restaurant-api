@@ -7,13 +7,17 @@ import { authMiddleware } from '../middlewares/authMiddleware';
 const router = Router();
 
 /**
- * @route POST /api/restaurants/:rId/comments
+ * @route POST /api/comments/:rId
  * @description Add a comment to a restaurant
  */
-router.post('/:rId/comments', authMiddleware, (req, res) => {
+router.post('/:rId', (req, res) => {
     const { rId } = req.params;
-    const { user, text } = req.body;
-
+    const { text } = req.body;
+    const user = req.body.user;
+    console.log('entro al comentario POST del comment')
+    console.log('rId', rId)
+    console.log('text', text)
+    console.log('user', user)
     try {
         //Find the restaurant by id
         const restaurant = restaurants.find((restaurant) => restaurant.id === rId);

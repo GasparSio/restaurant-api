@@ -42,7 +42,7 @@ router.post('/', authMiddleware, (req, res) => {
     try {
         //Recieve the data from the request body
         const {
-            name, address, cuisine, rating, image, description
+            name, address, lat, lng, cuisine, rating, image, description
         } = req.body;
     
         //Validate the data
@@ -50,6 +50,8 @@ router.post('/', authMiddleware, (req, res) => {
             id: uuidv4(),
             name,
             address,
+            lat,
+            lng,
             cuisine,
             rating,
             image,
