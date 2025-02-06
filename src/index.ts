@@ -5,12 +5,15 @@ import authRoutes from './routes/authRoutes';
 import restaurantRoutes from './routes/restaurantRoutes';
 import commentRoutes from './routes/commentRoutes';
 import favoriteRoutes from './routes/favoriteRoutes';
+import path from 'path';
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+// Serve static files to the client
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 
 const PORT = process.env.PORT || 5001;

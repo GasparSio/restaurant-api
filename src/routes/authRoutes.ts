@@ -53,6 +53,7 @@ router.post("/login", async (req, res) => {
         }
 
         const user = users.find((u) => u.email === email);
+
         console.log('user encontrado?', user)
         if (!user) {
             res.status(401).json({ message: "Invalid credentials" });
@@ -70,8 +71,8 @@ router.post("/login", async (req, res) => {
             return;
         }
 
-        const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: "2h" });
-        console.log('token', token)
+        const token = jwt.sign({ id: user.id, username: user.username, email: user.email }, SECRET_KEY, { expiresIn: "2h" });
+        
         res.json({ token });
     } catch (error) {
         console.error("Error on login:", error);

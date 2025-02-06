@@ -53,7 +53,6 @@ router.post('/', authMiddleware, (req, res) => {
             lat,
             lng,
             cuisine,
-            rating,
             image,
             description,
             comments: [],
@@ -87,7 +86,6 @@ router.put('/:id', authMiddleware, (req, res) => {
             restaurant.name = name || restaurant.name;
             restaurant.address = address || restaurant.address;
             restaurant.cuisine = cuisine || restaurant.cuisine;
-            restaurant.rating = rating || restaurant.rating;
             restaurant.image = image || restaurant.image;
             restaurant.description = description || restaurant.description;
     
