@@ -7,7 +7,7 @@ export interface Restaurant {
   lat: number;
   lng: number;
   cuisine: string;
-  image: string;
+  image: string | null;
   description: string;
   comments: Comment[];
 }

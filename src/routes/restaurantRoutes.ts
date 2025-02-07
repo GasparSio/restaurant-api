@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import multer from "multer";
 import { Restaurant, restaurants} from '../models/Restaurant';
 import { authMiddleware } from '../middlewares/authMiddleware';
 
 const router = Router();
+const upload = multer({ dest: "uploads/" }); // Guarda archivos en "uploads/"
 
 /**
  * @route   GET /api/restaurants
@@ -38,12 +40,11 @@ router.get('/:id', (req, res) => {
  * @route POST /api/restaurants
  * @description Create a new restaurant if the user is authenticated
  */
-router.post('/', authMiddleware, (req, res) => {
+router.post('/', upload.single("image"), (req, res) => {
     try {
         //Recieve the data from the request body
-        const {
-            name, address, lat, lng, cuisine, rating, image, description
-        } = req.body;
+        const { name, address, lat, lng, cuisine, description } = req.body;
+        const image = req.file ? req.file.filename : null;
     
         //Validate the data
         const newRestaurant: Restaurant = {
@@ -60,7 +61,8 @@ router.post('/', authMiddleware, (req, res) => {
     
         //Add the new restaurant to the array
         restaurants.push(newRestaurant);
-        res.status(201).json(newRestaurant);    
+        res.status(201).json(newRestaurant);  
+        console.log('Restaurant created', restaurants);  
     } catch (error) {
         console.error("Error on creating a new restaurant", error);
         res.status(500).json({ message: 'Internal server error' });
