@@ -1,7 +1,7 @@
 # restaurant-api
 ## Description
 
-This project is a RESTful API for managing a restaurant's menu, orders, and customers.
+This project is a RESTful API for managing restaurants
 
 ## Getting Started
 
