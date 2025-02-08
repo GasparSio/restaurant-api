@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 // Serve static files to the client
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/images", express.static(path.join(__dirname, "../src/images")));
 
 
 const PORT = process.env.PORT || 5001;

@@ -5,7 +5,7 @@ import { Restaurant, restaurants} from '../models/Restaurant';
 import { authMiddleware } from '../middlewares/authMiddleware';
 
 const router = Router();
-const upload = multer({ dest: "uploads/" }); // Guarda archivos en "uploads/"
+const upload = multer({ dest: "src/images/" }); // Guarda archivos en "uploads/"
 
 /**
  * @route   GET /api/restaurants
