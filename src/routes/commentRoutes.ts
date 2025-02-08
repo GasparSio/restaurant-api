@@ -49,7 +49,6 @@ router.put('/:rId/edit/:cId', (req, res) => {
     const { rId, cId } = req.params;
     const { text, rating } = req.body;
     const user = req.body.user;
-    console.log('entro al put del comment')
 
     try {
         //Find the restaurant by id

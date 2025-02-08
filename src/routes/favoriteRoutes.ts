@@ -21,10 +21,8 @@ router.get('/', authMiddleware, (req, res) => {
 
         //Get the list of favorite restaurant IDs for the user
         const favorites = user.favorites || [];
-        console.log('favorites al traernos el listado en el get', favorites);
         //Get the list of favorite restaurants for the user
         const favoriteRestaurants = restaurants.filter((restaurant) => favorites.includes(restaurant.id));
-        console.log('favoriteRestaurants en el GET', favoriteRestaurants);
         res.json(favoriteRestaurants);
     } catch (error) {
         console.error("Error getting favorite restaurants", error);
@@ -64,7 +62,6 @@ router.post('/:rId', authMiddleware, (req, res) => {
 
         //Add the restaurant to the user's favorites
         favorites.push(rId);
-        console.log('favorites al pushear', favorites);
         res.json({ message: "Restaurante agregado a favoritos", favorites });
     } catch (error) {
         console.error("Error adding restaurant to favorites", error);

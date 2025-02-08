@@ -62,7 +62,6 @@ router.post('/', upload.single("image"), (req, res) => {
         //Add the new restaurant to the array
         restaurants.push(newRestaurant);
         res.status(201).json(newRestaurant);  
-        console.log('Restaurant created', restaurants);  
     } catch (error) {
         console.error("Error on creating a new restaurant", error);
         res.status(500).json({ message: 'Internal server error' });

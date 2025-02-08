@@ -13,7 +13,6 @@ const SECRET_KEY = process.env.JWT_SECRET || 'secret123';
  */
 router.post("/register", async (req, res) => {
     try {
-        console.log('entro al api/auth/register')
         const { email, username, password } = req.body;
     
         if (!email || !username || !password) {
@@ -46,7 +45,6 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log('email, password', email, password)
         if (!email || !password) {
             res.status(400).json({ message: "Email and password are required" });
             return;
@@ -54,7 +52,6 @@ router.post("/login", async (req, res) => {
 
         const user = users.find((u) => u.email === email);
 
-        console.log('user encontrado?', user)
         if (!user) {
             res.status(401).json({ message: "Invalid credentials" });
             return;
@@ -65,7 +62,6 @@ router.post("/login", async (req, res) => {
             return;
         }
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        console.log('isPasswordValid', isPasswordValid)
         if (!isPasswordValid) {
             res.status(401).json({ message: "Invalid credentials" });
             return;
