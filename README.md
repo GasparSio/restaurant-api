@@ -14,7 +14,7 @@ This project is a RESTful API for managing a restaurant's menu, orders, and cust
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/GasparSio/restaurant-app.git
+    git clone https://github.com/GasparSio/restaurant-api.git
     ```
 2. Navigate to the project directory:
     ```bash
