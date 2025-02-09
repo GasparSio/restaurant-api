@@ -31,7 +31,6 @@ export interface Comment {
  * @property {string} lat - The latitude of the restaurant.
  * @property {string} lng - The longitud of the restaurant.
  * @property {string} cuisine - The type of cuisine the restaurant offers.
- * @property {number} rating - The rating of the restaurant out of 5.
  * @property {string} image - The URL of the restaurant's image.
  * @property {string} description - A brief description of the restaurant.
  * @property {string[]} comments - An array of comments about the restaurant.

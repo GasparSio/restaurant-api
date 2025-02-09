@@ -42,7 +42,7 @@ router.post('/:rId', (req, res) => {
 })
 
 /**
- * @route PUT /api/restaurants/:rId/comments/:cId
+ * @route PUT /api/comments/:rId/edit/:cId
  * @description Update a comment of a restaurant by id only if the user is the author
  */
 router.put('/:rId/edit/:cId', (req, res) => {
