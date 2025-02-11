@@ -9,8 +9,8 @@ export interface User {
 }
 
 /**
- * An array of Restaurant objects representing different restaurants.
- * Each restaurant object contains details such as id, name, address, cuisine, rating, image, description, and comments.
+ * An array of Users objects representing different users.
+ * Each restaurant object contains details such as id, email, username, password.
  * 
  * @type {User[]}
  * 
